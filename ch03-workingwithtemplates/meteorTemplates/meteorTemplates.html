@@ -1,0 +1,132 @@
+<head>
+  <title>meteorTemplates</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> expressions}} {{> partialsSplit}} {{> dynamicPartials}} {{> ifBlock}} {{> unlessBlock}} {{> eachBlock}} {{> withBlock}} {{> localHelpers}} {{> globalHelpers}} {{> coderOfTheMonth }} {{> templateElseBlock}} {{> logicByHelper }}
+</body>
+
+<template name="expressions">
+  <h3>Double curly braces</h3>
+  {{ name }}
+  <h3>Triple curly braces</h3>
+  {{{ name }}}
+</template>
+
+<template name="partialsSplit">
+  <h3>partialsSplit template</h3>
+  <div class="left">
+    {{> partialsUserProfile}}
+  </div>
+  <div class="right">
+    {{> partialsNewsStream}}
+  </div>
+</template>
+
+<template name="partialsUserProfile">
+  <img src="{{image}}">
+  <p>{{name}}</p>
+</template>
+
+<template name="partialsNewsStream">
+  <ul class="news-stream">
+    <li class="news-item">Yesterday I went fishing, boy this was a blast</li>
+    <li class="news-item">Look, cookies!
+      <img src="cookies.jpg">
+    </li>
+  </ul>
+</template>
+
+<template name="dynamicPartials">
+  <h3>dynamicPartials template</h3>
+  <div class="left">
+    {{> Template.dynamic template=templateNameLeft }}
+  </div>
+  <div class="right">
+    {{> Template.dynamic template=templateNameRight }}
+  </div>
+</template>
+
+<template name="ifBlock">
+  <h3>ifBlock template</h3>
+  <div class="cookies">
+    <p>Look, more cookies!</p>
+    {{#if image}}
+    <img src="{{image}}" /> {{else}}
+    <p>Sorry, no image available.</p>
+    {{/if}}
+  </div>
+</template>
+
+<template name="unlessBlock">
+  <h3>unlessBlock template</h3>
+  {{#unless image}}
+  <p>Sorry, no image available.</p>
+  {{/unless}}
+</template>
+
+<template name="eachBlock">
+  <h3>eachBlock template</h3>
+  <ul>
+    {{#each skills}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="withBlock">
+  <h3>withBlock template</h3>
+  <ul>
+    {{#with profileJim}}
+    <p>{{name}}</p>
+    {{#each skills}}
+    <li>{{this}}</li>
+    {{/each}} {{/with}}
+  </ul>
+</template>
+
+<template name="localHelpers">
+  <h3>localHelpers template</h3>
+  <p>{{name}}</p>
+  {{#if image}}
+  <img src="{{image.thumb}}"> {{/if}} {{#if skills}}
+  <p>Primary Skill: {{skills.[0]}}</p>
+  {{#if hasMoreSkills skills}}
+  <a href="/skills">see more…</a> {{/if}} {{/if}}
+</template>
+
+<template name="globalHelpers">
+  <h3>globalHelpers template</h3>
+  {{#if gt skills 1}}
+  <a href="/skills">see more…</a> {{/if}} {{#if gt images 4}}
+  <a href="/images">see more…</a> {{/if}}
+</template>
+
+<template name="coderOfTheMonth">
+  {{# sidebarWidget title="Coder of the month"}} Manuel {{/sidebarWidget}}
+</template>
+
+<template name="sidebarWidget">
+  <div class="sidebar-widget box">
+    <div class="title">{{ this.title }}</div>
+    <div class="content">
+      {{> Template.contentBlock}}
+    </div>
+  </div>
+</template>
+
+<template name="templateElseBlock">
+  <h3>templateElseBlock template</h3>
+  {{#isFemale gender}} Mrs. {{else}} Mr. {{/isFemale}}
+</template>
+
+<template name="isFemale">
+  {{#if eq this 'w'}} {{> Template.contentBlock}} {{else}} {{> Template.elseBlock}} {{/if}}
+</template>
+
+<template name="logicByHelper">
+  <h3>logicByHelper template</h3>
+  {{genderLabel gender}}
+</template>

@@ -1,0 +1,54 @@
+<head>
+  <title>Mobile Apps with Meteor</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Mobile Meteor App</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <h1>Let's go</h1>
+    {{> location}} {{> select}}
+  </div>
+</body>
+
+<template name="location">
+  {{#with currentPosition}}
+  <h2>You are here: </h2>
+  <ul>
+    <li>Lat: {{currentPosition.coords.latitude}}</li>
+    <li>Lng: {{currentPosition.coords.longitude}}</li>
+    <li>Accuracy: {{currentPosition.coords.accuracy}}</li>
+    <li>Altitude: {{currentPosition.coords.altitude}}</li>
+    <li>Altitude Accuracy: {{currentPosition.coords.altitudeAccuracy}}</li>
+    <li>Speed: {{currentPosition.coords.speed}}</li>
+    <li>Heading: {{currentPosition.coords.heading}}</li>
+  </ul>
+  {{else}}
+  <h2>Where are you?</h2>
+  <p>I have no idea where you are!</p>
+  {{/with}}
+</template>
+
+<template name="select">
+  <h2>Make a selection</h2>
+  <select id="platform">
+    <option value="Android">Android</option>
+    <option value="Browser">Browser</option>
+    <option value="iOS">iOS</option>
+    <option value="Server">Server</option>
+  </select>
+</template>
