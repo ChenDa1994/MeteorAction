@@ -17,6 +17,7 @@ Template.selectHouse.helpers({
     return Session.equals('selectedHouseId', this._id) ? 'selected' : '';
   }
 });
+
 Template.selectHouse.events = {
   'change #selectHouse': function (evt) {
     Session.set('selectedHouseId', evt.currentTarget.value);
